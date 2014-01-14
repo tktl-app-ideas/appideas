@@ -1,4 +1,2 @@
-appideas
-========
-
-Share your ideas, buy our stuff
+# App-Ideas
+- Share your ideas, buy our stuff
