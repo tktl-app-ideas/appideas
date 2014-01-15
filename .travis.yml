@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+- 2.1.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: fFBUqmdrUPrg71XkrFzJ8z7Q0vmulN4huujW4z1LZegpBEVX1ThwV9c9L1o9oHypwBv+U9ZPubLyOVNDA7koYG8jUpser45CGDb3EVdTAS3Hj0vwAcz9GHih8VcEVIi3gotw9KF/M8Fj8svOkD+kdNnjZ5VxpvqvqsDqyByYZrg=
+  app:
+    master: app-ideas-prod
+    development: app-ideas-staging
+  on:
+    repo: tktl-app-ideas/appideas
+  run: "rake db:migrate" 
