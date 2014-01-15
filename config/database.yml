@@ -23,4 +23,5 @@ production:
   encoding: unicode
   database: app-ideas-prod-db
   pool: 5
+  username: app-ideas-adm
   password:
