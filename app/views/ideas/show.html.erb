@@ -10,5 +10,12 @@
   <%= @idea.desc %>
 </p>
 
+<p>
+  <strong>Keywords:</strong>
+  <% @keywords.each do |k| %>
+    <p> <%= k.name %> </p>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
