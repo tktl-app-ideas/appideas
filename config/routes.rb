@@ -1,5 +1,5 @@
 Appideas::Application.routes.draw do
-		root 'idea#index'
+		root 'ideas#index'
 
 		resources :keywords
 		resources :ideas
