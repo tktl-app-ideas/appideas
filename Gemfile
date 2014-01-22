@@ -30,9 +30,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+		gem 'pry-rails'
+end
+
 group :development, :test do
 # use sqlite3 as the database for active record
   gem 'sqlite3'
+	gem 'rspec-rails'
 end
 
 group :production do
