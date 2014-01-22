@@ -10,6 +10,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
+    @keywords = Idea.find(params[:id]).keywords
   end
 
   # GET /ideas/new
