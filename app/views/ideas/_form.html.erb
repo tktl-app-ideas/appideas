@@ -19,7 +19,12 @@
     <%= f.label :desc %><br>
     <%= f.text_area :desc %>
   </div>
+  <div class="field">
+  	<%= f.collection_check_boxes(:keyword_ids, @keywords, :id, :name) %>
+  </div>
+  		
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
