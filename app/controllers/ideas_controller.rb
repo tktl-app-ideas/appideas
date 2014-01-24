@@ -16,6 +16,7 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   def new
     @idea = Idea.new
+    @keywords = Keyword.all
   end
 
   # GET /ideas/1/edit
@@ -29,6 +30,15 @@ class IdeasController < ApplicationController
 
     respond_to do |format|
       if @idea.save
+      	binding.pry
+      	keywords =
+      		Keyword.select do |k|
+      			params[:keyword_ids].include? k.id
+      		end
+      	@idea.keywords << keywords
+      	#params[:keyword_ids].each do |id|
+      	 #       IdeaKeyword.create idea_id:idea_id keyword_id:id
+      	#end
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
         format.json { render action: 'show', status: :created, location: @idea }
       else
