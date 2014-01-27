@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @idea.name
+%p
+  %strong Desc:
+  = @idea.desc
+%p
+  %strong Keywords:
+  - @keywords.each do |k| 
+    %p
+      = k.name
+= link_to 'Edit', edit_idea_path(@idea)
+|
+\#{link_to 'Back', ideas_path}
+
