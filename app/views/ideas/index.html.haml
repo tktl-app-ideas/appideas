@@ -14,7 +14,9 @@
       %tr
         %td= link_to idea.id, idea_path(idea)
         %td= idea.name
-        %td= idea.desc
+        %td
+          = truncate(idea.desc, length: 300)
+          = link_to 'Show more', idea 
         %td=l idea.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_idea_path(idea), :class => 'btn btn-mini'
