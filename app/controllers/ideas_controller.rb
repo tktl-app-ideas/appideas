@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
 
 		# GET /ideas/1/edit
 		def edit
+				@keywords = Keyword.all
 		end
 
 		# POST /ideas
