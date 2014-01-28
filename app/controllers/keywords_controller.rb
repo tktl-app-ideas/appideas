@@ -1,5 +1,6 @@
 class KeywordsController < ApplicationController
   before_action :set_keyword, only: [:show, :edit, :update, :destroy]
+  before_action :set_keywords
 
   # GET /keywords
   # GET /keywords.json
@@ -65,6 +66,10 @@ class KeywordsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_keyword
       @keyword = Keyword.find(params[:id])
+    end
+
+    def set_keywords
+      @words = Keyword.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
