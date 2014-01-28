@@ -63,17 +63,18 @@ class KeywordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_keyword
-      @keyword = Keyword.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_keyword
+    @keyword = Keyword.find(params[:id])
+  end
 
-    def set_keywords
-      @words = Keyword.all
-    end
+  def set_keywords
+    @words = Keyword.all
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def keyword_params
-      params.require(:keyword).permit(:name, :concrete)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def keyword_params
+    params.require(:keyword).permit(:name, :concrete)
+  end
+
 end
