@@ -29,6 +29,8 @@ gem 'coveralls', require: false
 
 gem 'haml'
 
+gem 'haml-rails'
+
 gem 'twitter-bootstrap-rails'
 
 group :doc do
