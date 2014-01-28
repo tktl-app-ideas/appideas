@@ -13,7 +13,7 @@
     - @ideas.each do |idea|
       %tr
         %td= link_to idea.id, idea_path(idea)
-        %td= idea.name
+        %td= link_to idea.name, idea
         %td
           = truncate(idea.desc, length: 300)
           = link_to 'Show more', idea 
@@ -23,3 +23,7 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(idea), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_idea_path, :class => 'btn btn-primary'
+
+
+
+
