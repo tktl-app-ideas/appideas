@@ -9,7 +9,8 @@
 %p
   %strong= model_class.human_attribute_name(:desc) + ':'
   %br
-  = @idea.desc
+  -# TODO: textarea formatting now includes returns
+  = simple_format @idea.desc
 
 %h3 Related Keywords:
 %ul
