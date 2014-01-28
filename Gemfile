@@ -39,13 +39,17 @@ group :doc do
 end
 
 group :development do
-		gem 'pry-rails'
+  gem 'pry-rails'
+  gem 'guard-rspec'
+  gem 'guard-bundler'
+  gem 'guard-livereload', require: false
 end
 
 group :development, :test do
-# use sqlite3 as the database for active record
+  # use sqlite3 as the database for active record
   gem 'sqlite3'
-	gem 'rspec-rails'
+  gem 'rspec-rails'
+  gem 'capybara'
 end
 
 group :production do
