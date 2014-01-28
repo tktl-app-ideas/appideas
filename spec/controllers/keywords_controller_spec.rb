@@ -87,14 +87,14 @@ describe KeywordsController do
         Keyword.any_instance.stub(:save).and_return(false)
         post :create, {:keyword => { "name" => "invalid value" }}, valid_session
         assigns(:keyword).should be_a_new(Keyword)
-      end
+        end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Keyword.any_instance.stub(:save).and_return(false)
         post :create, {:keyword => { "name" => "invalid value" }}, valid_session
         response.should render_template("new")
-      end
+        end
     end
   end
 
@@ -130,7 +130,7 @@ describe KeywordsController do
         Keyword.any_instance.stub(:save).and_return(false)
         put :update, {:id => keyword.to_param, :keyword => { "name" => "invalid value" }}, valid_session
         assigns(:keyword).should eq(keyword)
-      end
+        end
 
       it "re-renders the 'edit' template" do
         keyword = Keyword.create! valid_attributes
@@ -138,7 +138,7 @@ describe KeywordsController do
         Keyword.any_instance.stub(:save).and_return(false)
         put :update, {:id => keyword.to_param, :keyword => { "name" => "invalid value" }}, valid_session
         response.should render_template("edit")
-      end
+        end
     end
   end
 
