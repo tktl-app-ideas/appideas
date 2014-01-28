@@ -1,5 +1,6 @@
 class KeywordsController < ApplicationController
   before_action :set_keyword, only: [:show, :edit, :update, :destroy]
+  before_action :set_keywords
 
   # GET /keywords
   # GET /keywords.json
@@ -67,8 +68,13 @@ class KeywordsController < ApplicationController
     @keyword = Keyword.find(params[:id])
   end
 
+  def set_keywords
+    @words = Keyword.all
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def keyword_params
     params.require(:keyword).permit(:name, :concrete)
   end
+
 end
