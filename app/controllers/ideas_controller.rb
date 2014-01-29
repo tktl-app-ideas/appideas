@@ -14,14 +14,15 @@ class IdeasController < ApplicationController
 	# GET /ideas/1.json
 	def show
     idea = Idea.find(params[:id])
+    @keywords = idea.keywords
+    @words = @keywords
+    @all = Keyword.all
     keyword_id = params[:keyword_id]
     unless keyword_id.nil? or keyword_id.empty?
       keyword = Keyword.find(keyword_id)
       idea.keywords << keyword
+      redirect_to idea_path(idea)
     end
-		@keywords = idea.keywords
-    @words = @keywords
-    @all = Keyword.all
 	end
 
   # GET /ideas/new
