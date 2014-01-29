@@ -1,3 +1,4 @@
+
 - model_class = Idea
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
@@ -10,7 +11,7 @@
   %strong= model_class.human_attribute_name(:desc) + ':'
   %br
   -# TODO: textarea formatting now includes returns
-  = simple_format @idea.desc
+  = simple_format (auto_link (@idea.desc))
 
 %h3 Related Keywords:
 %ul
