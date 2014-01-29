@@ -42,10 +42,12 @@
             %ul.nav.nav-list
               %li.nav-header Keywords
               - @words.each do |keyword|                                     
-                %li= link_to keyword.name, keyword_path(keyword)
-        .span9
+                %li= link_to keyword.name, keyword_path(keyword)            
+        .span6
           = bootstrap_flash
           = yield
+        .span3
+          .well.sidebar-nav
     
       %footer
         %p &copy; tktl-appideas

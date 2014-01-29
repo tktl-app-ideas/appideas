@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+.well.sidebar-nav {
+  background:white;
+  border:none;
+}
