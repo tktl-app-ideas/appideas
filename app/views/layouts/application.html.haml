@@ -51,8 +51,7 @@
                     %span.caret
                   %ul.dropdown-menu{role: "manu"}
                     - @all.each do |keyword|
-                      %li= link_to keyword.name, idea_path(id: request.path[7])
-                %p= request.path[7]
+                      %li= link_to keyword.name, idea_path(id: request.path[7], keyword_id: keyword.id)
         .span6
           = bootstrap_flash
           = yield

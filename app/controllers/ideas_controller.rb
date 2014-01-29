@@ -13,7 +13,13 @@ class IdeasController < ApplicationController
   # GET /ideas/1
 	# GET /ideas/1.json
 	def show
-		@keywords = Idea.find(params[:id]).keywords
+    idea = Idea.find(params[:id])
+    keyword_id = params[:keyword_id]
+    unless keyword_id.nil? or keyword_id.empty?
+      keyword = Keyword.find(keyword_id)
+      idea.keywords << keyword
+    end
+		@keywords = idea.keywords
     @words = @keywords
     @all = Keyword.all
 	end
@@ -35,7 +41,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     keyword_ids = params[:idea][:keyword_ids]
-
+ 
     if @idea.save
       keywords =
         Keyword.select do |k|
