@@ -58,6 +58,10 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
+    fabrication (2.9.6)
+    fabrication-rails (0.0.1)
+      fabrication
+      railties (>= 3.0)
     ffi (1.9.3)
     formatador (0.2.4)
     guard (2.3.0)
@@ -217,6 +221,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.0.0)
   coveralls
+  fabrication-rails
   guard-bundler
   guard-livereload
   guard-rspec
