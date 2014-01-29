@@ -1,17 +1,21 @@
 class IdeasController < ApplicationController
+		
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_keywords
+    
   # GET /ideas
   # GET /ideas.json
   def index
     @ideas = Idea.all
   end
 
+
   # GET /ideas/1
-  # GET /ideas/1.json
-  def show
-    @keywords = Idea.find(params[:id]).keywords
-  end
+	# GET /ideas/1.json
+	def show
+		@keywords = Idea.find(params[:id]).keywords
+    @words = @keywords
+	end
 
   # GET /ideas/new
   def new
@@ -76,8 +80,13 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
   end
 
+  def set_keywords
+    @words = Keyword.all
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def idea_params
     params.require(:idea).permit(:name, :desc)
   end
+
 end
