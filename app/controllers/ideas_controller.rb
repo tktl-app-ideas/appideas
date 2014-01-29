@@ -15,6 +15,7 @@ class IdeasController < ApplicationController
 	def show
 		@keywords = Idea.find(params[:id]).keywords
     @words = @keywords
+    @all = Keyword.all
 	end
 
   # GET /ideas/new
@@ -26,6 +27,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @keywords = Keyword.all
+    @all = Keyword.all
   end
 
   # POST /ideas
@@ -53,6 +55,11 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
+    keyword_ids = params[:idea][:keyword_ids]      
+    keywords =
+      Keyword.select do |k|
+        keyword_ids.include? k.id.to_s
+      end
     respond_to do |format|
       if @idea.update(idea_params)
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
