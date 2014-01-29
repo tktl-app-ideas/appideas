@@ -42,7 +42,7 @@ class IdeasController < ApplicationController
         keyword_ids.include? k.id.to_s
         end
       @idea.keywords << keywords
-      redirect_to :back
+      redirect_to @idea
 
     else
       respond_to do |format|
