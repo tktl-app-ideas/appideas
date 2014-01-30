@@ -42,7 +42,7 @@
             %ul.nav.nav-list
               %li.nav-header Keywords
               - @words.each do |keyword|                                     
-                %li= link_to keyword.name, keyword_path(keyword)            
+                %li= link_to keyword.name, ideas_path(:kw =>keyword)            
         .span6
           = bootstrap_flash
           = yield
