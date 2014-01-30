@@ -8,3 +8,9 @@ Production:
 
 # App-Ideas
 - Share your ideas, buy our stuff
+
+### Live Development Version
+- http://app-ideas-staging.herokuapp.com
+
+### Continuous Deployment
+- https://travis-ci.org/tktl-app-ideas/appideas  
