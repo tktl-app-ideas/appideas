@@ -44,7 +44,20 @@
             %ul.nav.nav-list
               %li.nav-header Keywords
               - @words.each do |keyword|                                     
-                %li= link_to keyword.name, keyword_path(keyword)            
+                %li= link_to keyword.name, keyword_path(keyword)
+              %p
+              - if request.path.match(/ideas\/\d+/i)
+                .btn-group
+                  %button.btn.btn-default.btn-sm.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                    Add Keyword
+                    %span.caret
+                  %ul.dropdown-menu{role: "manu"}
+                    - @all.each do |keyword|
+                      %li
+                        - if @words.include? keyword
+                          = link_to raw('<i class="icon-ok icon-green"></i>') + keyword.name, ""
+                        - else
+                          = link_to keyword.name, idea_path(id: request.path.match(/\d+/i), keyword_id: keyword.id)
         .span6
           = bootstrap_flash
           = yield

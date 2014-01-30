@@ -7,6 +7,9 @@ describe "When not signed in" do
     Keyword.create name:"Mobile", concrete:false
     visit idea_path(idea)
     expect(page).to have_content("Project")
-    expect(page).to have_no_content("Mobile")
+#    expect(page).to have_no_content("Mobile")
+    within '.nav-header' do
+      page.should have_no_content 'Mobile'
+    end
   end
 end
