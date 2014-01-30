@@ -10,4 +10,4 @@ deploy:
     development: app-ideas-staging
   on:
     repo: tktl-app-ideas/appideas
-    run: "rake db:migrate" 
+  run: "rake db:migrate" 
