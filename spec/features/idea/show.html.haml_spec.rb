@@ -8,5 +8,8 @@ describe "When not signed in" do
     visit idea_path(idea)
     expect(page).to have_content("Project")
 #    expect(page).to have_no_content("Mobile")
+    within '.nav-header' do
+      page.should have_no_content 'Mobile'
+    end
   end
 end
