@@ -1,6 +1,6 @@
 - model_class = Idea
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1=t '.title', :default => @keywordname + model_class.model_name.human.pluralize.titleize
 %table.table.table-striped
   %thead
     %tr
@@ -11,7 +11,7 @@
       %th= model_class.human_attribute_name(:Ideas)
       -#%th=t '.actions', :default => t("helpers.actions")
   %tbody
-    - @ideas.each do |idea|
+    - @indexideas.each do |idea|
       %tr
         %td
           -#= link_to idea.id, idea_path(idea)
@@ -21,7 +21,7 @@
           -#%td=l idea.created_at
           -#%td 
           - idea.keywords.each do |kw|
-            = link_to kw.name, keyword_path(kw) 
+            = link_to kw.name, ideas_path(:kw => kw) 
         -#%td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_idea_path(idea), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(idea), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
