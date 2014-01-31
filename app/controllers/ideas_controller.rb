@@ -10,6 +10,8 @@ class IdeasController < ApplicationController
     @ideas = Idea.all
     @indexideas = Idea.all if kw.nil?
     @indexideas = Idea.all.select{ |i| i.keywords.include?(kw)} if not kw.nil?
+    @keywordname = "" if kw.nil?
+    @keywordname = kw.name  + " - " unless kw.nil?
   end
 
 
