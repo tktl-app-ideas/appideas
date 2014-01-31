@@ -14,6 +14,14 @@ class IdeasController < ApplicationController
     @indexideas = Idea.all.select{ |i| i.keywords.include?(kw)} if not kw.nil?
     @keywordname = "" if kw.nil?
     @keywordname = kw.name  + " - " unless kw.nil?
+    @keywords = []
+    @indexideas.each do |i|
+      i.keywords.each do |k| 
+        @keywords << k
+      end
+    end
+    @keywords = @keywords.inject([]){ |result, h| result << h unless result.include?(h); result }
+    @words = @keywords unless kw.nil?
   end
 
 
