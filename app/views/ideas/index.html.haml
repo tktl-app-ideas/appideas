@@ -17,8 +17,7 @@
           -#= link_to idea.id, idea_path(idea)
           %h4= link_to idea.name, idea
           %p
-            =truncate(idea.desc, length: 300)
-            =link_to 'Show more', idea 
+            =simple_format(auto_link (truncate(idea.desc, length: 300) + link_to(" Show More", idea)))
           -#%td=l idea.created_at
           -#%td 
           - idea.keywords.each do |kw|
@@ -29,6 +28,4 @@
 
 -# = link_to t('.new', :default => t("helpers.links.new")), new_idea_path, :class => 'btn btn-primary'
 
-
-
-
+    
