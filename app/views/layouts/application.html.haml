@@ -16,7 +16,8 @@
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
-
+    -# Glypicons link
+    %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
 
   %body
     .navbar.navbar-fluid-top
@@ -44,7 +45,11 @@
             %ul.nav.nav-list
               %li.nav-header Keywords
               - @words.each do |keyword|                                     
-                %li= link_to keyword.name, ideas_path(:kw =>keyword) 
+                %span
+                  %li
+                    = link_to keyword.name, ideas_path(:kw => keyword)
+                    - if request.path.include? "ideas" and request.path =~ /\d/
+                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-danger'
               %p
               - if request.path.match(/ideas\/\d+/i)
                 .btn-group
