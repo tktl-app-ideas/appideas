@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "When not signed in" do
+
   it "the Idea page should show all related keywords in the sidebar" do
     idea = Idea.create(name:"Hello Idea", desc:"Great idea")
     idea.keywords.create name:"Project", concrete:false
@@ -12,4 +13,5 @@ describe "When not signed in" do
       page.should have_no_content 'Mobile'
     end
   end
+  
 end
