@@ -20,6 +20,11 @@ class IdeasController < ApplicationController
     @words = @keywords
     @all = Keyword.all
     keyword_id = params[:keyword_id]
+    remove_id = params[:remove_id]
+    unless remove_id.nil? or remove_id.empty?
+      #keyword = Keyword.find(remove_id)
+      idea.keywords.delete(remove_id)
+    end
     unless keyword_id.nil? or keyword_id.empty?
       keyword = Keyword.find(keyword_id)
       idea.keywords << keyword
