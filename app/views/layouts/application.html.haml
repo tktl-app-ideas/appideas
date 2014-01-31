@@ -47,7 +47,7 @@
               - @words.each do |keyword|                                     
                 %span
                   %li
-                    = link_to keyword.name, keyword_path(keyword)
+                    = link_to keyword.name, ideas_path(:kw => keyword)
                     - if request.path.include? "ideas" and request.path =~ /\d/
                       = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-danger'
               %p
