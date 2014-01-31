@@ -8,13 +8,18 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
+    kw = Keyword.find(params[:kw].to_i) unless params[:kw].nil?
     @ideas = Idea.all
+    @indexideas = Idea.all if kw.nil?
+    @indexideas = Idea.all.select{ |i| i.keywords.include?(kw)} if not kw.nil?
+    @keywordname = "" if kw.nil?
+    @keywordname = kw.name  + " - " unless kw.nil?
   end
 
 
   # GET /ideas/1
 	# GET /ideas/1.json
-	def show
+  def show
     idea = Idea.find(params[:id])
     @keywords = idea.keywords
     @words = @keywords
@@ -25,11 +30,13 @@ class IdeasController < ApplicationController
       idea.keywords << keyword
       redirect_to idea_path(idea)
     end
-	end
+  end
+    
 
   # GET /ideas/new
   def new
     @idea = Idea.new
+
     @keywords = Keyword.all
   end
 
@@ -38,9 +45,7 @@ class IdeasController < ApplicationController
     @keywords = Keyword.all
     @all = Keyword.all
   end
-
-  # POST /ideas
-  # POST /ideas.json
+# POST /ideas # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
     keyword_ids = params[:idea][:keyword_ids]
