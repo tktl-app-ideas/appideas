@@ -48,6 +48,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-livereload', require: false
+  gem 'foreman'
 end
 
 group :development, :test do
@@ -55,6 +56,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'spork-rails'
 end
 
 group :production do
