@@ -47,6 +47,7 @@ group :development do
   gem 'pry-rails'
   gem 'guard-rspec'
   gem 'guard-bundler'
+  gem 'guard-spork'
   gem 'guard-livereload', require: false
   gem 'foreman'
 end
