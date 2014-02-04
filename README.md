@@ -15,3 +15,9 @@ Production:
 
 ### Continuous Deployment
 - https://travis-ci.org/tktl-app-ideas/appideas  
+
+### Lean chart
+https://docs.google.com/spreadsheet/ccc?key=0AsxBjRl1mEhYdEl1SDE3S2JTdFAyNUllRWRIWmR4M3c&usp=drive_web#gid=0
+
+### Working hours tracking
+https://docs.google.com/spreadsheet/ccc?key=0AsxBjRl1mEhYdEVBRnM0ZkRMbnFDdTYzSVJwS3AtQkE&usp=drive_web#gid=0
