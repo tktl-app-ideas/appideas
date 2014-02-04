@@ -17,7 +17,7 @@
         %td
           = link_to "", @idea, :method => :vote_up, :class => 'glyphicon glyphicon-chevron-up btn-default'
           %br
-          =  0
+          = idea.votes.size
           %br
           = link_to "", @idea, :method => :vote_down, :class => 'glyphicon glyphicon-chevron-down btn-default'
         %td

@@ -1,8 +1,6 @@
 require 'rails_autolink'
 
 class IdeasController < ApplicationController
-
-	helper_method :vote_up
 		
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   before_action :set_keywords
@@ -125,8 +123,10 @@ class IdeasController < ApplicationController
     params.require(:idea).permit(:name, :desc)
   end
   
-  def vote_up
-  	#@idea.liked_by @user1
+  def upvote
+    #@idea = idea.find(params[:id])
+  	#@idea.liked_by User.find(1)
+  	#redirect_to @idea
   end
   
   def vote_down
