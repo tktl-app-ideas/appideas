@@ -15,11 +15,11 @@
     - @indexideas.each do |idea|
       %tr
         %td
-          = link_to "", idea, :class => 'glyphicon glyphicon-chevron-up btn-default'
+          = link_to "", @idea, :method => :vote_up, :class => 'glyphicon glyphicon-chevron-up btn-default'
           %br
           =  0
           %br
-          = link_to "", idea, :class => 'glyphicon glyphicon-chevron-down btn-default'
+          = link_to "", @idea, :method => :vote_down, :class => 'glyphicon glyphicon-chevron-down btn-default'
         %td
           -#= link_to idea.id, idea_path(idea)
           %h4= link_to idea.name, idea
