@@ -1,4 +1,6 @@
 Appideas::Application.routes.draw do
+  resources :users
+
   root 'ideas#index'
 
   resources :keywords

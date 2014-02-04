@@ -37,3 +37,7 @@ k21 = Keyword.create name:"Hackatron", concrete:true
 k22 = Keyword.create name:"Competition", concrete:true
 k23 = Keyword.create name:"Code Retreat", concrete:true
 k24 = Keyword.create name:"GameJam", concrete:true
+
+# test user
+user = User.create username:"Test", password:"Test"
+
