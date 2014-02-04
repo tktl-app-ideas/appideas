@@ -1,6 +1,8 @@
 require 'rails_autolink'
 
 class IdeasController < ApplicationController
+
+	helper_method :vote_up
 		
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   before_action :set_keywords
@@ -121,6 +123,14 @@ class IdeasController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def idea_params
     params.require(:idea).permit(:name, :desc)
+  end
+  
+  def vote_up
+  	#@idea.liked_by @user1
+  end
+  
+  def vote_down
+  	#@idea.downvote_from @user1
   end
 
 end
