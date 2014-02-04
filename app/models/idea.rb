@@ -1,4 +1,5 @@
 class Idea < ActiveRecord::Base
+  acts_as_commentable
 
   has_many :idea_keywords, :dependent => :destroy
   has_many :keywords, through: :idea_keywords
