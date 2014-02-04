@@ -126,11 +126,11 @@ class IdeasController < ApplicationController
   end
   
   def vote_up
-  	@idea.liked_by @user1
+  	#@idea.liked_by @user1
   end
   
   def vote_down
-  	@idea.downvote_from @user1
+  	#@idea.downvote_from @user1
   end
 
 end
