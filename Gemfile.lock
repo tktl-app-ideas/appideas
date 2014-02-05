@@ -227,11 +227,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-<<<<<<< HEAD
   acts_as_votable
-=======
   acts_as_commentable_with_threading
->>>>>>> 4723e7b23e9061f7cc36b1ee9e67e5d1e283c91d
   capybara
   coffee-rails (~> 4.0.0)
   coveralls
