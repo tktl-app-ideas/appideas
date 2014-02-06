@@ -122,5 +122,15 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea).permit(:name, :desc)
   end
+  
+  def upvote
+    #@idea = idea.find(params[:id])
+  	#@idea.liked_by @user1
+  	#redirect_to @idea
+  end
+  
+  def downvote
+  	#@idea.downvote_from @user1
+  end
 
 end
