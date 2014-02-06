@@ -125,11 +125,11 @@ class IdeasController < ApplicationController
   
   def upvote
     #@idea = idea.find(params[:id])
-  	#@idea.liked_by User.find(1)
+  	#@idea.liked_by @user1
   	#redirect_to @idea
   end
   
-  def vote_down
+  def downvote
   	#@idea.downvote_from @user1
   end
 
