@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe IdeasController do
 
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { name: "MyString", desc: "Description" } }
 
   let(:valid_session) { {} }
 

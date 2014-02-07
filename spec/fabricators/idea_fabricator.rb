@@ -8,5 +8,5 @@ Fabricator(:idea) do
 end
 
 Fabricator(:user) do
-  name "Houston" 
+  username "Houston" 
 end

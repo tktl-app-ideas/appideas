@@ -229,6 +229,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_commentable_with_threading
   acts_as_votable
+  awesome_nested_set
   capybara
   coffee-rails (~> 4.0.0)
   coveralls
