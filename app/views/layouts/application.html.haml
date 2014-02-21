@@ -76,7 +76,7 @@
                         = comment.created_at
                       %br
                       = comment.body
-            = form_tag('/ideas/1', :method => :patch) do
+            = form_tag(request.path, :method => :patch) do
               = text_area_tag :comment_body
               = submit_tag "Comment"
     
