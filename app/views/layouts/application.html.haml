@@ -57,7 +57,19 @@
           = bootstrap_flash
           = yield
         .span3
-          .well.sidebar-nav
+          - if request.path =~ /\/ideas\/\d+$/
+            %table.table.table-bordered.table-striped
+              %tbody
+                - @comments.each do |comment|
+                  %tr
+                    %td 
+                      %small 
+                        = comment.created_at
+                      %br
+                      = comment.body
+            = form_tag(request.path, :method => :patch) do
+              = text_area_tag :comment_body
+              = submit_tag "Comment"
     
       %footer
         %p &copy; tktl-appideas
