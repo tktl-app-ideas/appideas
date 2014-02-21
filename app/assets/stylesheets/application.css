@@ -11,7 +11,26 @@
  *= require_self
  *= require_tree .
  */
+ 
+ 
 .well.sidebar-nav {
   background:white;
   border:none;
 }
+
+.nav-tabs a {
+   height: 90px;  
+  line-height: 90px;
+	 font-size:22px;
+line-height: 19px;
+}
+
+.li {
+}
+
+.li.hover
+{ 
+background-color:yellow;
+}
+
+

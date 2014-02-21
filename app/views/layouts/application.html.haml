@@ -19,22 +19,13 @@
     -# Glypicons link
     %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
 
-  %body
-    .navbar.navbar-fluid-top
-      .navbar-inner
-        .container-fluid
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          -#%a.brand(href="#") Appideas
-          -# TODO Fix this quick fix when a better way presents itself 
-          = link_to "Appideas", root_url, class: "brand"
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Ideas", ideas_path
-              %li= link_to "New Idea", new_idea_path
+  %header    
+    %ul.nav.nav-tabs
+      %li= link_to image_tag( 'logocopy.png'), ideas_path
+      %li= link_to "Ideas", ideas_path
+      %li= link_to "New Idea", new_idea_path
 
+  %body
 
     .container-fluid
 

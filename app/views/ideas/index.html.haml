@@ -1,7 +1,7 @@
 %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
 - model_class = Idea
-.page-header
-  %h1=t '.title', :default => @keywordname + model_class.model_name.human.pluralize.titleize
+.page-body
+  %strong=t '.title', :default => @keywordname + model_class.model_name.human.pluralize.titleize
 %table.table.table-striped
   %thead
     %tr
@@ -9,7 +9,7 @@
       -#%th= model_class.human_attribute_name(:name)
       -#%th= model_class.human_attribute_name(:desc)
       -#%th= model_class.human_attribute_name(:created_at)
-      %th= model_class.human_attribute_name(:Ideas)
+      -#%th= model_class.human_attribute_name(:Ideas)
       -#%th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @indexideas.each do |idea|

@@ -51,6 +51,12 @@ class IdeasController < ApplicationController
     @idea = Idea.new
 
     @keywords = Keyword.all
+    
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @keywords.sort_by!{ |b| b.name }
+    end
   end
 
   # GET /ideas/1/edit
@@ -116,6 +122,12 @@ class IdeasController < ApplicationController
 
   def set_keywords
     @words = Keyword.all
+    
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @words.sort_by!{ |b| b.name }
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

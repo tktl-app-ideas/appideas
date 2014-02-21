@@ -13,16 +13,16 @@
       = link_to "", ideas_path, :class => 'glyphicon glyphicon-chevron-down btn-default'
     %td
       %p
-        %strong= model_class.human_attribute_name(:name) + ':'
+        %strong Name:
         %br
         = @idea.name
       %p
-        %strong= model_class.human_attribute_name(:desc) + ':'
+        %strong Description:
         %br
         -# TODO: textarea formatting now includes returns
         = simple_format (auto_link (@idea.desc))
 
-      %h3 Related Keywords:
+      %strong Related Keywords:
       %ul
         - @keywords.each do |k|
           %li= k.name
