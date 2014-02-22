@@ -1,35 +1,36 @@
-%link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
-- model_class = Idea
+.body
+  %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
+  - model_class = Idea
 
--#.page-header
-  -#%h1=t '.title', :default => model_class.model_name.human.titleize
-%table.table.table-striped
-  %tr
-    %td
-      = link_to "", ideas_path, :class => 'glyphicon glyphicon-chevron-up btn-default'
-      %br
-      = @idea.votes.size
-      %br
-      = link_to "", ideas_path, :class => 'glyphicon glyphicon-chevron-down btn-default'
-    %td
-      %p
-        %strong Name:
+  -#.page-header
+    -#%h1=t '.title', :default => model_class.model_name.human.titleize
+  %table.table
+    %tr
+      %td
+        = link_to "", like_idea_path(@idea), method: :put, :class => 'glyphicon glyphicon-chevron-up btn-default'
         %br
-        = @idea.name
-      %p
-        %strong Description:
+        = @idea.upvotes.size-@idea.downvotes.size
         %br
-        -# TODO: textarea formatting now includes returns
-        = simple_format (auto_link (@idea.desc))
+        = link_to "", dislike_idea_path(@idea), method: :put, :class => 'glyphicon glyphicon-chevron-down btn-default'
+      %td
+        %p
+          %strong Name:
+          %br
+          = @idea.name
+        %p
+          %strong Description:
+          %br
+          -# TODO: textarea formatting now includes returns
+          = simple_format (auto_link (@idea.desc))
 
-      %strong Related Keywords:
-      %ul
-        - @keywords.each do |k|
-          %li= k.name
+        %strong Related Keywords:
+        %ul
+          - @keywords.each do |k|
+            %li= k.name
 
-.form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), ideas_path, :class => 'btn'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_idea_path(@idea), :class => 'btn'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(@idea), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  .form-actions
+    = link_to t('.back', :default => t("helpers.links.back")), ideas_path, :class => 'btn'
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_idea_path(@idea), :class => 'btn'
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(@idea), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
 
 

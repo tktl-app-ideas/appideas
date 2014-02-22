@@ -128,6 +128,20 @@ class IdeasController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def upvote
+    @idea = Idea.find(params[:id])
+    user = User.first
+    @idea.liked_by User.first
+    redirect_to :back
+  end
+  
+  def downvote
+    @idea = Idea.find(params[:id])
+    user = User.first
+    @idea.downvote_from User.first
+    redirect_to :back
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -154,15 +168,6 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea).permit(:name, :desc)
   end
-  
-  def upvote
-    #@idea = idea.find(params[:id])
-  	#@idea.liked_by @user1
-  	#redirect_to @idea
-  end
-  
-  def downvote
-  	#@idea.downvote_from @user1
-  end
+
 
 end

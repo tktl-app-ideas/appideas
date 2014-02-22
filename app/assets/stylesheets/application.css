@@ -11,26 +11,28 @@
  *= require_self
  *= require_tree .
  */
- 
- 
-.well.sidebar-nav {
-  background:white;
-  border:none;
+
+.nav-tabs>li>a,
+.nav-pills>li>a{
+	*zoom:1;
+	font-size:large;
+	font-family:"Lithos Pro";
+	font-weight:bold;	
+	height:50px;
+  
+.nav-tabs:before,
+.nav-pills:before,
+.nav-tabs:after,
+.nav-pills:after{
 }
 
-.nav-tabs a {
-   height: 90px;  
-  line-height: 90px;
-	 font-size:22px;
-line-height: 19px;
-}
 
-.li {
-}
 
-.li.hover
-{ 
-background-color:yellow;
-}
+
+
+
+
+
+
 
 

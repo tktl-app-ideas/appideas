@@ -19,11 +19,13 @@
     -# Glypicons link
     %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
 
-  %header    
-    %ul.nav.nav-tabs
-      %li= link_to image_tag( 'logocopy.png'), ideas_path
-      %li= link_to "Ideas", ideas_path
-      %li= link_to "New Idea", new_idea_path
+
+  %header
+    %navbar.navbar-default
+      %ul.nav.nav-tabs
+        %li.brand= link_to image_tag( 'logo40.png'), ideas_path
+        %li= link_to "Ideas", ideas_path
+        %li= link_to "New Idea", new_idea_path
 
   %body
 
@@ -39,7 +41,7 @@
                   %li
                     = link_to keyword.name, ideas_path(:kw => keyword)
                     - if request.path.include? "ideas" and request.path =~ /\d/
-                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-danger'
+                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-default'
               %p
               - if request.path.match(/ideas\/\d+/i)
                 .btn-group
