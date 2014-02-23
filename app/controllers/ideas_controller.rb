@@ -46,6 +46,11 @@ class IdeasController < ApplicationController
       @idea.keywords << keyword
       redirect_to idea_path(@idea)
     end
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @all.sort_by!{ |b| b.name }
+    end
   end
     
 
