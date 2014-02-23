@@ -8,6 +8,8 @@ Appideas::Application.routes.draw do
   resources :users
 
   get 'admin/keywords', to: 'keywords#index'
+  get '/keywords', to: 'ideas#index'
+
   
 resources :ideas do
   member do
