@@ -33,9 +33,10 @@ class IdeasController < ApplicationController
     # get comments from db
     @comments = Comment.find_comments_for_commentable( "Idea", @idea.id )
     @keywords = @idea.keywords
-    @words = @keywords
+    #@words = @keywords
     @all = Keyword.all
     keyword_id = params[:keyword_id]
+=begin
     remove_id = params[:remove_id]
     unless remove_id.nil? or remove_id.empty?
       #keyword = Keyword.find(remove_id)
@@ -46,6 +47,7 @@ class IdeasController < ApplicationController
       @idea.keywords << keyword
       redirect_to idea_path(@idea)
     end
+=end
     order = params[:order] || 'name'
 
     case order

@@ -40,9 +40,10 @@
                 %span
                   %li
                     = link_to keyword.name, ideas_path(:kw => keyword)
+                  /  
                     - if request.path =~ /\/ideas\/\d+$/
                       = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :class => 'glyphicon glyphicon-remove btn-default'
-
+            /
               %p
               - if request.path.match(/\/ideas\/\d+$/)
                 .btn-group
