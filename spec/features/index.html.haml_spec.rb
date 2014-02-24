@@ -6,7 +6,7 @@ describe "Front page" do
     let(:keyword) { Fabricate(:keyword) }
 
     before :each do
-      idea.save
+      #idea.save
       idea.keywords << keyword
     end
 
