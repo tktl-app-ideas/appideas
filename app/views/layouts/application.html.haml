@@ -32,7 +32,7 @@
     .container-fluid
 
       .row-fluid
-        .span3
+        .span3#left-sidebar
           .well.sidebar-nav
             %ul.nav.nav-list
               %li.nav-header Keywords
@@ -56,10 +56,10 @@
                           = link_to raw('<i class="icon-ok icon-green"></i>') + keyword.name, ""
                         - else
                           = link_to keyword.name, idea_path(id: request.path.match(/\d+/i), keyword_id: keyword.id)
-        .span6
+        .span6#main-content
           = bootstrap_flash
           = yield
-        .span3
+        .span3#right-sidebar
           - if request.path =~ /\/ideas\/\d+$/
             %table.table.table-bordered.table-striped
               %tbody
