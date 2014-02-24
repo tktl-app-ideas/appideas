@@ -47,10 +47,10 @@
                 %span
                   %li
                     = link_to keyword.name, ideas_path(:kw => keyword)
-                    - if request.path.include? "ideas" and request.path =~ /\d/
-                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-danger'
+                    - if request.path =~ /\/ideas\/\d+$/
+                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\/ideas\/\d+$/), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-danger'
               %p
-              - if request.path.match(/ideas\/\d+/i)
+              - if request.path.match(/\/ideas\/\d+$/)
                 .btn-group
                   %button.btn.btn-default.btn-sm.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
                     Add Keyword
