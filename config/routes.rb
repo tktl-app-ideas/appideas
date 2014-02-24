@@ -9,6 +9,7 @@ Appideas::Application.routes.draw do
 
   get 'admin/keywords', to: 'keywords#index'
   get '/keywords', to: 'ideas#index'
+  get 'admin/ideas', to: 'ideas#admin'
 
   
 resources :ideas do
