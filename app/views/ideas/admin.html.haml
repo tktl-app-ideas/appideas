@@ -10,7 +10,7 @@
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
-    - @ideas.each do |idea|
+    - @ideas.reverse.each do |idea|
       %tr
         %td= link_to idea.id, idea_path(idea)
         %td= idea.name
