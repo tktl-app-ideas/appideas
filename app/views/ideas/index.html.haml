@@ -14,7 +14,7 @@
   %tbody
     - @indexideas.each do |idea|
       %tr
-        %td
+        %td{style: "width:5%"}
           = link_to "", like_idea_path(idea), method: :put, :class => 'glyphicon glyphicon-chevron-up btn-default'            
           %br
           = idea.upvotes.size-idea.downvotes.size
