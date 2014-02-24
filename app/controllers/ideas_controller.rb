@@ -20,9 +20,17 @@ class IdeasController < ApplicationController
       i.keywords.each do |k| 
         @keywords << k
       end
+      
+    order = params[:order] || 'id'
+
+    case order
+      when 'id' then @indexideas.sort_by!{ |b| b.id }
+    end
     end
     @keywords = @keywords.inject([]){ |result, h| result << h unless result.include?(h); result }
     @words = @keywords unless kw.nil?
+    
+    
   end
 
 
