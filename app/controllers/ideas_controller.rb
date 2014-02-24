@@ -103,13 +103,21 @@ class IdeasController < ApplicationController
       comment = Comment.build_from(@idea, user.id, comment_body)
       comment.save
     end
+    old_keywords = @idea.keywords
     if(params.has_key?(:idea))
-      #unless params[:idea][:keyword_ids].nil? or params[:idea][:keyword_ids].empty?    
       keyword_ids = params[:idea][:keyword_ids]
       keywords =
         Keyword.select do |k|
           keyword_ids.include? k.id.to_s
         end
+      keywords.each do |kw|
+        unless old_keywords.include? kw
+          @idea.keywords << kw
+        end
+      end
+      old_keywords.each do |old|
+        old.destroy unless keywords.include? old
+      end
       respond_to do |format|
         if @idea.update(idea_params)
           format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }

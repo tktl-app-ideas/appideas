@@ -40,10 +40,11 @@
                 %span
                   %li
                     = link_to keyword.name, ideas_path(:kw => keyword)
-                    - if request.path.include? "ideas" and request.path =~ /\d/
+                    - if request.path =~ /\/ideas\/\d+$/
                       = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :class => 'glyphicon glyphicon-remove btn-default'
+
               %p
-              - if request.path.match(/ideas\/\d+/i)
+              - if request.path.match(/\/ideas\/\d+$/)
                 .btn-group
                   %button.btn.btn-default.btn-sm.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
                     Add Keyword
