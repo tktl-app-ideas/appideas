@@ -29,6 +29,17 @@ a {
   }
 }
 
+a.glyphicon {
+  color:red;
+  &:visited {
+    color:red;
+  }
+  &:hover {
+    color:grey;
+    background-color:none;
+  }
+}
+
 div {
   &.field, &.actions {
     margin-bottom: 10px;
