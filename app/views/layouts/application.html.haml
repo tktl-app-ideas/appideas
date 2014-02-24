@@ -19,23 +19,15 @@
     -# Glypicons link
     %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
 
-  %body
-    .navbar.navbar-fluid-top
-      .navbar-inner
-        .container-fluid
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          -#%a.brand(href="#") Appideas
-          -# TODO Fix this quick fix when a better way presents itself 
-          = link_to "Appideas", root_url, class: "brand"
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Ideas", ideas_path
-              %li= link_to "Keywords", keywords_path
-              %li= link_to "New Idea", new_idea_path
 
+  %header
+    %navbar.navbar-default
+      %ul.nav.nav-tabs
+        -# %li= link_to image_tag( 'logo40.png'), ideas_path
+        %li= link_to "Ideas", ideas_path
+        %li= link_to "New Idea", new_idea_path
+
+  %body
 
     .container-fluid
 
@@ -48,10 +40,11 @@
                 %span
                   %li
                     = link_to keyword.name, ideas_path(:kw => keyword)
-                    - if request.path.include? "ideas" and request.path =~ /\d/
-                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'glyphicon glyphicon-remove btn-danger'
+                    - if request.path =~ /\/ideas\/\d+$/
+                      = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :class => 'glyphicon glyphicon-remove btn-default'
+
               %p
-              - if request.path.match(/ideas\/\d+/i)
+              - if request.path.match(/\/ideas\/\d+$/)
                 .btn-group
                   %button.btn.btn-default.btn-sm.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
                     Add Keyword
@@ -67,7 +60,19 @@
           = bootstrap_flash
           = yield
         .span3
-          .well.sidebar-nav
+          - if request.path =~ /\/ideas\/\d+$/
+            %table.table.table-bordered.table-striped
+              %tbody
+                - @comments.each do |comment|
+                  %tr
+                    %td 
+                      %small 
+                        = comment.created_at
+                      %br
+                      = comment.body
+            = form_tag(request.path, :method => :patch) do
+              = text_area_tag :comment_body
+              = submit_tag "Comment"
     
       %footer
         %p &copy; tktl-appideas

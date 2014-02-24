@@ -6,3 +6,7 @@ Fabricator(:idea) do
   
   Pork belly pig shankle jowl ribeye short ribs filet mignon drumstick tenderloin meatball pork andouille ball tip ham hock. Pork belly pork shankle turkey chuck. T-bone capicola brisket chicken. Pancetta pork loin doner ground round pork spare ribs sirloin."
 end
+
+Fabricator(:user) do
+  username "Houston" 
+end

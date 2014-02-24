@@ -35,6 +35,12 @@ gem 'twitter-bootstrap-rails'
 
 gem 'rails_autolink'
 
+gem 'acts_as_votable'
+
+gem 'acts_as_commentable_with_threading'
+
+gem 'awesome_nested_set'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
