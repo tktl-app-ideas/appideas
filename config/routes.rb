@@ -8,6 +8,16 @@ Appideas::Application.routes.draw do
   resources :users
 
   get 'admin/keywords', to: 'keywords#index'
+  get '/keywords', to: 'ideas#index'
+  get 'admin/ideas', to: 'ideas#admin'
+
+  
+resources :ideas do
+  member do
+    put "like", to: "ideas#upvote"
+    put "dislike", to: "ideas#downvote"
+  end
+end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

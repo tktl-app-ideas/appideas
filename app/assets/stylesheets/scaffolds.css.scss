@@ -25,7 +25,18 @@ a {
   }
   &:hover {
     color: #fff;
-    background-color: #000;
+    background-color:none;
+  }
+}
+
+a.glyphicon {
+  color:red;
+  &:visited {
+    color:red;
+  }
+  &:hover {
+    color:grey;
+    background-color:none;
   }
 }
 
@@ -67,3 +78,27 @@ div {
     list-style: square;
   }
 }
+
+input, textarea, select, .uneditable-input {
+    width: 100%;
+    resize: none;
+}
+
+select,textarea,input[type="text"],input[type="password"],.uneditable-input{
+	display:inline-block;
+	height:25px;
+	padding:4px 6px;
+	margin-bottom:10px;
+	font-size:14px;
+	line-height:20px;
+	color:#555555;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	vertical-align:middle;}
+	
+select,textarea,input[type="desc"]{
+	height:150px;
+}
+
+

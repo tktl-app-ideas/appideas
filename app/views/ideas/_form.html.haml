@@ -1,16 +1,16 @@
-= form_for @idea, :html => { :class => 'form-horizontal' } do |f|
+= form_for @idea, :html => { :class => 'form-vertical' } do |f|
   .control-group
     = f.label :name, :class => 'control-label'
     .controls
       = f.text_field :name, :class => 'text_field'
   .control-group
-    = f.label :desc, :class => 'control-label'
+    = f.label "Description", :class => 'control-label', type:'desc'
     .controls
-      = f.text_area :desc, :class => 'text_area'
+      = f.text_area :desc, :class => 'text_area', type:'text'
   .control-group
     = f.label :keywords, :class => 'control-label'
     .controls
-      = f.collection_check_boxes(:keyword_ids, @keywords, :id, :name)
+      = f.collection_check_boxes(:keyword_ids, @keywords, :id, :name, {}, {:class => 'checkbox'} ) { |input| input.label(:class => 'checkbox') { input.check_box + input.text } }
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), ideas_path, :class => 'btn'

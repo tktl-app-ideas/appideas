@@ -1,25 +1,25 @@
 %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}/
 - model_class = Idea
-.page-header
-  %h1=t '.title', :default => @keywordname + model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
+.page-body
+  %strong=t '.title', :default => @keywordname + model_class.model_name.human.pluralize.titleize
+%table.table
   %thead
     %tr
       -#%th= model_class.human_attribute_name(:id)
       -#%th= model_class.human_attribute_name(:name)
       -#%th= model_class.human_attribute_name(:desc)
       -#%th= model_class.human_attribute_name(:created_at)
-      %th= model_class.human_attribute_name(:Ideas)
+      -#%th= model_class.human_attribute_name(:Ideas)
       -#%th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @indexideas.each do |idea|
       %tr
-        %td
-          = link_to "", @idea, :method => :vote_up, :class => 'glyphicon glyphicon-chevron-up btn-default'
+        %td{style: "width:5%"}
+          = link_to "", like_idea_path(idea), method: :put, :class => 'glyphicon glyphicon-chevron-up btn-default'            
           %br
-          = idea.votes.size
+          = idea.upvotes.size-idea.downvotes.size
           %br
-          = link_to "", @idea, :method => :vote_down, :class => 'glyphicon glyphicon-chevron-down btn-default'
+          = link_to "", dislike_idea_path(idea), method: :put, :class => 'glyphicon glyphicon-chevron-down btn-default'
         %td
           -#= link_to idea.id, idea_path(idea)
           %h4= link_to idea.name, idea
