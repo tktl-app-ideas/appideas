@@ -20,9 +20,17 @@ class IdeasController < ApplicationController
       i.keywords.each do |k| 
         @keywords << k
       end
+      
+    order = params[:order] || 'id'
+
+    case order
+      when 'id' then @indexideas.sort_by!{ |b| b.id }
+    end
     end
     @keywords = @keywords.inject([]){ |result, h| result << h unless result.include?(h); result }
     @words = @keywords unless kw.nil?
+    
+    
   end
 
 
@@ -33,9 +41,10 @@ class IdeasController < ApplicationController
     # get comments from db
     @comments = Comment.find_comments_for_commentable( "Idea", @idea.id )
     @keywords = @idea.keywords
-    @words = @keywords
+    #@words = @keywords
     @all = Keyword.all
     keyword_id = params[:keyword_id]
+=begin
     remove_id = params[:remove_id]
     unless remove_id.nil? or remove_id.empty?
       #keyword = Keyword.find(remove_id)
@@ -46,6 +55,7 @@ class IdeasController < ApplicationController
       @idea.keywords << keyword
       redirect_to idea_path(@idea)
     end
+=end
     order = params[:order] || 'name'
 
     case order
@@ -76,15 +86,15 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     keyword_ids = params[:idea][:keyword_ids]
-    if @idea.save
-      keywords =
+    keywords =
         Keyword.select do |k|
         keyword_ids.include? k.id.to_s
         end
+    if @idea.save
       @idea.keywords << keywords
       redirect_to @idea
-
     else
+      @keywords = Keyword.all
       respond_to do |format|
         format.html { render action: 'new' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }

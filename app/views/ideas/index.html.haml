@@ -12,7 +12,7 @@
       -#%th= model_class.human_attribute_name(:Ideas)
       -#%th=t '.actions', :default => t("helpers.actions")
   %tbody
-    - @indexideas.each do |idea|
+    - @indexideas.reverse.each do |idea|
       %tr
         %td{style: "width:5%"}
           = link_to "", like_idea_path(idea), method: :put, :class => 'glyphicon glyphicon-chevron-up btn-default'            
