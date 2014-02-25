@@ -56,6 +56,8 @@ group :development do
   gem 'guard-spork'
   gem 'guard-livereload', require: false
   gem 'foreman'
+  gem 'rails-erd'
+  gem 'railroady'
 end
 
 group :development, :test do
