@@ -30,6 +30,12 @@ class IdeasController < ApplicationController
     @keywords = @keywords.inject([]){ |result, h| result << h unless result.include?(h); result }
     @words = @keywords unless kw.nil?
     
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @words.sort_by!{ |b| b.name }
+    end
+    
     
   end
 
@@ -80,6 +86,12 @@ class IdeasController < ApplicationController
   def edit
     @keywords = Keyword.all
     @all = Keyword.all
+    
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @keywords.sort_by!{ |b| b.name }
+    end
   end
 
 # POST /ideas # POST /ideas.json
@@ -114,6 +126,8 @@ class IdeasController < ApplicationController
       comment.save
     end
     old_keywords = @idea.keywords
+    
+    
     if(params.has_key?(:idea))
       keyword_ids = params[:idea][:keyword_ids]
       keywords =
@@ -133,6 +147,10 @@ class IdeasController < ApplicationController
           format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
           format.json { head :no_content }
         else
+          @keywords = Keyword.all
+    			@all = Keyword.all
+  # Any other options to set comments? It shows now idea's comments after trying to update unvalid idea.
+    			set_comments
           format.html { render action: 'edit' }
           format.json { render json: @idea.errors, status: :unprocessable_entity }
         end
