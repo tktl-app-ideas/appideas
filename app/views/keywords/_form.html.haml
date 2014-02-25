@@ -1,4 +1,8 @@
 = form_for @keyword, :html => { :class => 'form-horizontal' } do |f|
+  - @keyword.errors.full_messages.each do |msg|
+    %p
+      %font{color: "red"}
+        = msg
   .control-group
     = f.label :name, :class => 'control-label'
     .controls
