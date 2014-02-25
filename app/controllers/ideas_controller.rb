@@ -86,15 +86,15 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     keyword_ids = params[:idea][:keyword_ids]
-    if @idea.save
-      keywords =
+    keywords =
         Keyword.select do |k|
         keyword_ids.include? k.id.to_s
         end
+    if @idea.save
       @idea.keywords << keywords
       redirect_to @idea
-
     else
+      @keywords = Keyword.all
       respond_to do |format|
         format.html { render action: 'new' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }

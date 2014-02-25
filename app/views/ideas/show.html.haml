@@ -24,13 +24,13 @@
           = simple_format (auto_link (@idea.desc))
 
         %strong Related Keywords:
-        %ul
-          - @keywords.each do |k|
-            %li= k.name
+        %br
+        - @keywords.each do |k|
+          = link_to k.name, ideas_path(:kw => k)
 
   .form-actions
     = link_to t('.back', :default => t("helpers.links.back")), ideas_path, :class => 'btn'
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_idea_path(@idea), :class => 'btn'
-    = link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(@idea), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    -#= link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(@idea), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
 
 

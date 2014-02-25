@@ -21,3 +21,16 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      idea:
+        desc: "Description"
+        name: "Name"
+    errors:
+      models:
+        idea:
+          attributes:
+            desc:
+              blank: "is required"
+            name:
+              blank: "is required"
