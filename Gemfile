@@ -53,7 +53,11 @@ group :development do
   gem 'pry-rails'
   gem 'guard-rspec'
   gem 'guard-bundler'
+  gem 'guard-spork'
   gem 'guard-livereload', require: false
+  gem 'foreman'
+  gem 'rails-erd'
+  gem 'railroady'
 end
 
 group :development, :test do
@@ -61,6 +65,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'spork-rails'
 end
 
 group :production do

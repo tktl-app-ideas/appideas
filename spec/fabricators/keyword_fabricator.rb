@@ -7,3 +7,4 @@ Fabricator(:keyword2, class_name:"Keyword") do
   name "Project"
   concrete false
 end
+
