@@ -126,7 +126,7 @@ class IdeasController < ApplicationController
         end
       end
       old_keywords.each do |old|
-        old.destroy unless keywords.include? old
+        IdeaKeyword.find_by_keyword_id_and_idea_id(old.id, @idea.id).destroy unless keywords.include? old
       end
       respond_to do |format|
         if @idea.update(idea_params)
