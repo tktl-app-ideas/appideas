@@ -16,7 +16,7 @@
 .nav-pills>li>a{
 	*zoom:1;
 	font-size:large;
-	font-family:"Lithos Pro";
+	*font-family:"Lithos Pro";
 	font-weight:bold;	
 	height:40px;
 }
