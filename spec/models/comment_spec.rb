@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "When not signed in" do
   before :each do 
     @idea = Idea.create(name:"Hello Idea", desc:"Great idea")
-    @user = User.create(username:"Matt", password:"pass")
+    @user = User.create(username:"Matt", password:"pass", password_confirmation:"pass")
 		@comment = Comment.build_from( @idea, @user.id, "Hey guys this is my comment!" )
 		@comment.save
   end
