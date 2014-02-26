@@ -69,6 +69,7 @@
           - if request.path =~ /\/ideas\/\d+$/
             %table.table.table-bordered.table-striped
               %tbody
+                ='Comments:'
                 - @comments.each do |comment|
                   %tr
                     %td 
