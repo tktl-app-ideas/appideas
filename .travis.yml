@@ -4,7 +4,7 @@ rvm:
 deploy:
   provider: heroku
   api_key:
-    secure: fFBUqmdrUPrg71XkrFzJ8z7Q0vmulN4huujW4z1LZegpBEVX1ThwV9c9L1o9oHypwBv+U9ZPubLyOVNDA7koYG8jUpser45CGDb3EVdTAS3Hj0vwAcz9GHih8VcEVIi3gotw9KF/M8Fj8svOkD+kdNnjZ5VxpvqvqsDqyByYZrg=
+    secure: doEcOhCcxUiRop/XxuTJl2YxMzVzfWL2UjJ3FN/nUqLeoRLOUTaC9tfKZ1HvMloE4DXnMrGvRtJ4o1kJ9Gd09fuHR6qWdGqgvkYzI3zcC5YzG9R6H9HaxWmqBjd3EHUNMB+wcbtSYZpuXYmv9/kvHsyHwEk923yDT95G9ihkBfg=
   app:
     master: app-ideas-prod
     development: app-ideas-staging
