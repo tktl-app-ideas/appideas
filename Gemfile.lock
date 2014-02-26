@@ -34,6 +34,7 @@ GEM
     atomic (1.1.14)
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
+    bcrypt-ruby (3.1.2)
     builder (3.1.4)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -257,6 +258,7 @@ DEPENDENCIES
   acts_as_commentable_with_threading
   acts_as_votable
   awesome_nested_set
+  bcrypt-ruby (~> 3.1.2)
   capybara
   coffee-rails (~> 4.0.0)
   coveralls
