@@ -67,13 +67,13 @@
           = yield
         .span3#right-sidebar
           - if request.path =~ /\/ideas\/\d+$/
-            %table.table.table-bordered.table-striped
+            %table.table.table-bordered.table-striped{:id => "comment_table"}
               %tbody
                 ='Comments:'
                 - @comments.each do |comment|
                   %tr
-                    %td 
-                      %small 
+                    %td
+                      %small{:id => "comment_cell"} 
                         = comment.created_at
                       %br
                       = simple_format (auto_link (comment.body))
