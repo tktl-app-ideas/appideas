@@ -6,11 +6,14 @@ Appideas::Application.routes.draw do
   resources :keywords
   resources :ideas
   resources :users
+  resources :sessions, only: [:new, :create]
 
   get 'admin/keywords', to: 'keywords#index'
   get '/keywords', to: 'ideas#index'
   get 'admin/ideas', to: 'ideas#admin'
-
+  get 'signup', to: 'users#new'
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
   
 resources :ideas do
   member do
