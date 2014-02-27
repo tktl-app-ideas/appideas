@@ -76,6 +76,13 @@ class UsersController < ApplicationController
 
     def set_keywords
       @words = Keyword.all
+      
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @words.sort_by!{ |b| b.name }
+    end
+    
     end
 
 end

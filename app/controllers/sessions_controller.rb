@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
   def new
     @words = Keyword.all
+    
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @words.sort_by!{ |b| b.name }
+    end
+    
   end
 
   def create

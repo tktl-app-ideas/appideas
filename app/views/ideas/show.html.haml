@@ -4,7 +4,7 @@
 
   -#.page-header
     -#%h1=t '.title', :default => model_class.model_name.human.titleize
-  %table.table.details
+  %table.table.details{:id => "comment_table"}
     %tr
       %td{style: "width:6%"}
         = link_to "", like_idea_path(@idea), method: :put, :class => 'glyphicon glyphicon-chevron-up btn-default'
