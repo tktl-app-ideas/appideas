@@ -3,7 +3,16 @@
 .page-body
   %strong=t '.title', :default => @keywordname + model_class.model_name.human.pluralize.titleize
 %table.table.details{:id => "comment_table"}
+
+- if @indexideas.empty?
+  %br
+  %b= "No ideas yet, why don't you add one?"
+  %p
+    = render :partial => "form"
+
+%table.table{:id => "comment_table"}
   %tbody
+    
     - @indexideas.reverse.each do |idea|
       %tr
         %td{style: "width:6%"}
@@ -31,5 +40,6 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), idea_path(idea), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 -# = link_to t('.new', :default => t("helpers.links.new")), new_idea_path, :class => 'btn btn-primary'
+    
 
     
