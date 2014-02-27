@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204113749) do
+ActiveRecord::Schema.define(version: 20140225125306) do
 
   create_table "comments", force: true do |t|
     t.integer  "commentable_id",   default: 0
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20140204113749) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
   create_table "votes", force: true do |t|

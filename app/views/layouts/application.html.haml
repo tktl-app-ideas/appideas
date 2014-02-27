@@ -26,7 +26,12 @@
         -# %li= link_to image_tag( 'logo40.png'), ideas_path
         %li= link_to "Ideas", ideas_path
         %li= link_to "New Idea", new_idea_path
-
+        - if not current_user.nil?
+          %li= link_to "|  " + current_user.username unless current_user.nil?
+          %li= link_to 'signout', signout_path, method: :delete
+        - else
+          %li= link_to '| signin', signin_path
+          %li= link_to 'signup', signup_path
   %body
 
     .container-fluid
@@ -62,15 +67,16 @@
           = yield
         .span3#right-sidebar
           - if request.path =~ /\/ideas\/\d+$/
-            %table.table.table-bordered.table-striped
+            %table.table.table-bordered.table-striped{:id => "comment_table"}
               %tbody
+                ='Comments:'
                 - @comments.each do |comment|
                   %tr
-                    %td 
-                      %small 
+                    %td
+                      %small{:id => "comment_cell"} 
                         = comment.created_at
                       %br
-                      = comment.body
+                      = simple_format (auto_link (comment.body))
             = form_tag(request.path, :method => :patch) do
               = text_area_tag :comment_body
               = submit_tag "Comment"

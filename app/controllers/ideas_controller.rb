@@ -11,22 +11,29 @@ class IdeasController < ApplicationController
   def index
     kw = Keyword.find(params[:kw].to_i) unless params[:kw].nil?
     @ideas = Idea.all
-    @indexideas = Idea.all if kw.nil?
-    @indexideas = Idea.all.select{ |i| i.keywords.include?(kw)} if not kw.nil?
     @keywordname = "" if kw.nil?
     @keywordname = kw.name  + " - " unless kw.nil?
+    @indexideas = Idea.all if kw.nil?
+    @indexideas = Idea.all.select{ |i| i.keywords.include?(kw)} if not kw.nil?
+
+# This section adds filtering to keyword bar, customer doesn't want it anymore
+=begin
     @keywords = []
     @indexideas.each do |i|
-      i.keywords.each do |k| 
-        @keywords << k
-      end
-      
-    order = params[:order] || 'id'
+        i.keywords.each do |k| 
+          @keywords << k
+        end
+        
+      order = params[:order] || 'id'
 
-    case order
-      when 'id' then @indexideas.sort_by!{ |b| b.id }
+      case order
+        when 'id' then @indexideas.sort_by!{ |b| b.id }
+      end
     end
-    end
+=end
+# replaced by @keywords = Keyword.all
+    @keywords = Keyword.all
+
     @keywords = @keywords.inject([]){ |result, h| result << h unless result.include?(h); result }
     @words = @keywords unless kw.nil?
     
@@ -172,15 +179,13 @@ class IdeasController < ApplicationController
   
   def upvote
     @idea = Idea.find(params[:id])
-    user = User.first
-    @idea.liked_by User.first
+    @idea.liked_by current_user
     redirect_to :back
   end
   
   def downvote
     @idea = Idea.find(params[:id])
-    user = User.first
-    @idea.downvote_from User.first
+    @idea.downvote_from current_user
     redirect_to :back
   end
 
