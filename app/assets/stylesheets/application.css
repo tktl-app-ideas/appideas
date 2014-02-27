@@ -27,6 +27,21 @@
 .nav-pills:after{
 }
 
+#comment_table {
+  table-layout:fixed;
+  width:100%;
+  *word-wrap:break_word;
+}
+
+#comment_table td {
+  word-wrap:break-word;
+  word-wrap:break-all;
+}
+
+#comment_cell {
+  word-wrap:break-word;
+  word-wrap:break-all;
+}
 
 
 

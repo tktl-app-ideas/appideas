@@ -183,15 +183,13 @@ class IdeasController < ApplicationController
   
   def upvote
     @idea = Idea.find(params[:id])
-    user = User.first
-    @idea.liked_by User.first
+    @idea.liked_by current_user
     redirect_to :back
   end
   
   def downvote
     @idea = Idea.find(params[:id])
-    user = User.first
-    @idea.downvote_from User.first
+    @idea.downvote_from current_user
     redirect_to :back
   end
 
