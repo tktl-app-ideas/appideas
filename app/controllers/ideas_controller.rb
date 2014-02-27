@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
 		
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   before_action :set_keywords
+	before_action :ensure_that_signed_in, only: [:upvote, :downvote]
   #before_action :set_comments
     
   # GET /ideas
