@@ -43,6 +43,9 @@ class IdeasController < ApplicationController
       when 'name' then @words.sort_by!{ |b| b.name }
     end
     
+    # this new idea needed when there is no related keyword to form new idea partial
+    @idea = Idea.new
+    
     
   end
 
@@ -74,6 +77,7 @@ class IdeasController < ApplicationController
     case order
       when 'name' then @all.sort_by!{ |b| b.name }
     end
+
   end
     
 
