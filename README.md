@@ -21,3 +21,6 @@ https://docs.google.com/spreadsheet/ccc?key=0AsxBjRl1mEhYdEl1SDE3S2JTdFAyNUllRWR
 
 ### Working hours tracking
 https://docs.google.com/spreadsheet/ccc?key=0AsxBjRl1mEhYdEVBRnM0ZkRMbnFDdTYzSVJwS3AtQkE&usp=drive_web#gid=0
+
+### Kanban board
+https://drive.google.com/folderview?id=0B8xBjRl1mEhYdEFKRUdDR05OdGs&usp=sharing
