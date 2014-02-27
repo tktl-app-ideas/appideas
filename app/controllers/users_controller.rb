@@ -29,7 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        session[:user_id] = @user.id
+        format.html { redirect_to ideas_path, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -75,6 +76,13 @@ class UsersController < ApplicationController
 
     def set_keywords
       @words = Keyword.all
+      
+    order = params[:order] || 'name'
+
+    case order
+      when 'name' then @words.sort_by!{ |b| b.name }
+    end
+    
     end
 
 end

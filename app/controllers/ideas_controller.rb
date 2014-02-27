@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
 		
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   before_action :set_keywords
+	before_action :ensure_that_signed_in, only: [:upvote, :downvote]
   #before_action :set_comments
     
   # GET /ideas
@@ -129,7 +130,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1.json
   def update
     @idea = Idea.find(params[:id])
-    # get user to add comment, for now just one default user
+    # get user to add comment, for now use dummy user
     user = User.first
     comment_body = params[:comment_body]
     unless comment_body.nil? or comment_body.empty?

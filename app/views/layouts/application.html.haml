@@ -27,11 +27,11 @@
         %li= link_to "Ideas", ideas_path
         %li= link_to "New Idea", new_idea_path
         - if not current_user.nil?
-          %li= link_to "|  " + current_user.username unless current_user.nil?
-          %li= link_to 'signout', signout_path, method: :delete
+          %li.small= link_to current_user.username unless current_user.nil?
+          %li.small= link_to 'Signout', signout_path, method: :delete
         - else
-          %li= link_to '| signin', signin_path
-          %li= link_to 'signup', signup_path
+          %li.small= link_to 'Signin', signin_path
+          %li.small= link_to 'Signup', signup_path
   %body
 
     .container-fluid

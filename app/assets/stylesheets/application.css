@@ -20,6 +20,15 @@
 	font-weight:bold;	
 	height:40px;
 }
+
+.nav-tabs>li.small>a,
+.nav-pills>li.small>a{
+	*zoom:1;
+	font-size:small;
+	*font-family:"Lithos Pro";
+	font-weight:bold;	
+	height:40px;
+}
    
 .nav-tabs:before,
 .nav-pills:before,
