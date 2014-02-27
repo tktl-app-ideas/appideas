@@ -183,15 +183,23 @@ class IdeasController < ApplicationController
   end
   
   def upvote
-    @idea = Idea.find(params[:id])
-    @idea.liked_by current_user
-    redirect_to :back
+    if current_user.nil?
+      redirect_to signin_path, notice:'In order to vote, you should sign in'
+    else
+      @idea = Idea.find(params[:id])
+      @idea.liked_by current_user
+      redirect_to :back
+    end
   end
   
   def downvote
-    @idea = Idea.find(params[:id])
-    @idea.downvote_from current_user
-    redirect_to :back
+    if current_user.nil?
+      redirect_to signin_path, notice:'In order to vote, you should sign in'
+    else
+      @idea = Idea.find(params[:id])
+      @idea.downvote_from current_user
+      redirect_to :back
+    end
   end
 
   def admin
