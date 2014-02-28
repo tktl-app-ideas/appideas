@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">users/index</dt>
+    <script type="text/javascript">moveProgressBar('1.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders a list of users</span><span class='duration'>0.07938s</span></dd>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_2" class="passed">Idea page</dt>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_3" class="passed">when not signed in</dt>
+    <script type="text/javascript">moveProgressBar('2.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should show all related keywords in the sidebar</span><span class='duration'>0.44204s</span></dd>
+    <script type="text/javascript">moveProgressBar('3.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should show only all related keywords in main content</span><span class='duration'>0.12214s</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_4" class="passed">When not signed in</dt>
+    <script type="text/javascript">moveProgressBar('4.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">1 new vote in the db after voting</span><span class='duration'>0.05817s</span></dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_5" class="passed">KeywordsController</dt>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_6" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_7" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('5.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">creates a new Keyword</span><span class='duration'>0.04702s</span></dd>
+    <script type="text/javascript">moveProgressBar('6.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created keyword as @keyword</span><span class='duration'>0.01439s</span></dd>
+    <script type="text/javascript">moveProgressBar('7.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created keyword</span><span class='duration'>0.02368s</span></dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_8" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('8.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved keyword as @keyword</span><span class='duration'>0.01261s</span></dd>
+    <script type="text/javascript">moveProgressBar('9.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the &#39;new&#39; template</span><span class='duration'>0.00847s</span></dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_9" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('10.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested keyword as @keyword</span><span class='duration'>0.03242s</span></dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_10" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('11.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested keyword</span><span class='duration'>0.02063s</span></dd>
+    <script type="text/javascript">moveProgressBar('12.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the keywords list</span><span class='duration'>0.01434s</span></dd>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_11" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('13.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new keyword as @keyword</span><span class='duration'>0.00744s</span></dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_12" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('15.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all keywords as @keywords</span><span class='duration'>0.01344s</span></dd>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_13" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_14" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('16.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested keyword</span><span class='duration'>0.01492s</span></dd>
+    <script type="text/javascript">moveProgressBar('17.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested keyword as @keyword</span><span class='duration'>0.01434s</span></dd>
+    <script type="text/javascript">moveProgressBar('18.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the keyword</span><span class='duration'>0.01480s</span></dd>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_15" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('19.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the keyword as @keyword</span><span class='duration'>0.01498s</span></dd>
+    <script type="text/javascript">moveProgressBar('20.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the &#39;edit&#39; template</span><span class='duration'>0.01511s</span></dd>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_16" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('21.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested keyword as @keyword</span><span class='duration'>0.01297s</span></dd>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_17" class="passed">Keyword admin page</dt>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_18" class="passed">when not signed in</dt>
+    <script type="text/javascript">moveProgressBar('22.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should list all keywords in main content</span><span class='duration'>0.13214s</span></dd>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_19" class="passed">Keyword</dt>
+    <script type="text/javascript">moveProgressBar('23.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">is saved with the correct name</span><span class='duration'>0.00969s</span></dd>
+    <script type="text/javascript">moveProgressBar('24.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved without name</span><span class='duration'>0.00606s</span></dd>
+    <script type="text/javascript">moveProgressBar('25.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">is saved with correct concrete</span><span class='duration'>0.00859s</span></dd>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_20" class="passed">users/edit</dt>
+    <script type="text/javascript">moveProgressBar('26.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders the edit user form</span><span class='duration'>0.05470s</span></dd>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_21" class="passed">IdeasController</dt>
+  </dl>
+</div>
+<div id="div_group_22" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_22" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_23" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_23" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('27.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">creates a new Idea</span><span class='duration'>0.01557s</span></dd>
+    <script type="text/javascript">moveProgressBar('29.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created idea as @idea</span><span class='duration'>0.01251s</span></dd>
+    <script type="text/javascript">moveProgressBar('30.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created idea</span><span class='duration'>0.01400s</span></dd>
+  </dl>
+</div>
+<div id="div_group_24" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_24" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('31.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved idea as @idea</span><span class='duration'>0.01244s</span></dd>
+    <script type="text/javascript">moveProgressBar('32.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the &#39;new&#39; template</span><span class='duration'>0.00937s</span></dd>
+  </dl>
+</div>
+<div id="div_group_25" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_25" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('33.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested idea as @idea</span><span class='duration'>0.01546s</span></dd>
+  </dl>
+</div>
+<div id="div_group_26" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_26" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('34.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested idea</span><span class='duration'>0.02181s</span></dd>
+    <script type="text/javascript">moveProgressBar('35.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the ideas list</span><span class='duration'>0.01517s</span></dd>
+  </dl>
+</div>
+<div id="div_group_27" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_27" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('36.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new idea as @idea</span><span class='duration'>0.00801s</span></dd>
+  </dl>
+</div>
+<div id="div_group_28" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_28" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('37.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all ideas as @ideas</span><span class='duration'>0.01379s</span></dd>
+  </dl>
+</div>
+<div id="div_group_29" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_29" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_30" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_30" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('38.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested idea</span><span class='duration'>0.02047s</span></dd>
+    <script type="text/javascript">moveProgressBar('39.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested idea as @idea</span><span class='duration'>0.01691s</span></dd>
+    <script type="text/javascript">moveProgressBar('40.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the idea</span><span class='duration'>0.02798s</span></dd>
+  </dl>
+</div>
+<div id="div_group_31" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_31" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('41.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the idea as @idea</span><span class='duration'>0.01900s</span></dd>
+    <script type="text/javascript">moveProgressBar('43.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the &#39;edit&#39; template</span><span class='duration'>0.01904s</span></dd>
+  </dl>
+</div>
+<div id="div_group_32" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_32" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('44.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested idea as @idea</span><span class='duration'>0.01287s</span></dd>
+  </dl>
+</div>
+<div id="div_group_33" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_33" class="passed">Keywords</dt>
+  </dl>
+</div>
+<div id="div_group_34" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_34" class="passed">GET /keywords</dt>
+    <script type="text/javascript">moveProgressBar('45.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span><span class='duration'>0.16461s</span></dd>
+  </dl>
+</div>
+<div id="div_group_35" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_35" class="passed">User</dt>
+    <script type="text/javascript">moveProgressBar('46.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">is saved with correct name and password</span><span class='duration'>0.00989s</span></dd>
+    <script type="text/javascript">moveProgressBar('47.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved if username is already in use</span><span class='duration'>0.01589s</span></dd>
+    <script type="text/javascript">moveProgressBar('48.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved if password is null</span><span class='duration'>0.01677s</span></dd>
+  </dl>
+</div>
+<div id="div_group_36" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_36" class="passed">Front page</dt>
+  </dl>
+</div>
+<div id="div_group_37" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_37" class="passed">When not signed in</dt>
+    <script type="text/javascript">moveProgressBar('49.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">the Idea index page should list all the ideas</span><span class='duration'>0.12221s</span></dd>
+    <script type="text/javascript">moveProgressBar('50.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">the Idea index page should show all keywords in the sidebar</span><span class='duration'>0.12003s</span></dd>
+  </dl>
+</div>
+<div id="div_group_38" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_38" class="passed">UsersController</dt>
+  </dl>
+</div>
+<div id="div_group_39" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_39" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_40" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_40" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('51.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">creates a new User</span><span class='duration'>0.01685s</span></dd>
+    <script type="text/javascript">moveProgressBar('52.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created user as @user</span><span class='duration'>0.01574s</span></dd>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_40');</script>
+    <script type="text/javascript">makeRed('example_group_40');</script>
+    <script type="text/javascript">moveProgressBar('53.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">redirects to the created user</span>
+      <span class="duration">0.01583s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>Expected response to be a redirect to &lt;http://test.host/users/1&gt; but was a redirect to &lt;http://test.host/ideas&gt;.
+Expected &quot;http://test.host/users/1&quot; to be === &quot;http://test.host/ideas&quot;.</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/users_controller_spec.rb:80:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">78</span>      it "redirects to the created user" do
+<span class="linenum">79</span>        post :create, {:user => valid_attributes}, valid_session
+<span class="offending"><span class="linenum">80</span>        response.should redirect_to(User.last)</span>
+<span class="linenum">81</span>      end
+<span class="linenum">82</span>    end
+<span class="linenum">83</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_41" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_41" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('54.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved user as @user</span><span class='duration'>0.01157s</span></dd>
+    <script type="text/javascript">moveProgressBar('55.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the &#39;new&#39; template</span><span class='duration'>0.00840s</span></dd>
+  </dl>
+</div>
+<div id="div_group_42" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_42" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('56.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested user as @user</span><span class='duration'>0.01576s</span></dd>
+  </dl>
+</div>
+<div id="div_group_43" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_43" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('58.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested user</span><span class='duration'>0.01815s</span></dd>
+    <script type="text/javascript">moveProgressBar('59.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the users list</span><span class='duration'>0.01705s</span></dd>
+  </dl>
+</div>
+<div id="div_group_44" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_44" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('60.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new user as @user</span><span class='duration'>0.00806s</span></dd>
+  </dl>
+</div>
+<div id="div_group_45" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_45" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('61.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all users as @users</span><span class='duration'>0.01545s</span></dd>
+  </dl>
+</div>
+<div id="div_group_46" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_46" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_47" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_47" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('62.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested user</span><span class='duration'>0.01719s</span></dd>
+    <script type="text/javascript">moveProgressBar('63.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested user as @user</span><span class='duration'>0.03383s</span></dd>
+    <script type="text/javascript">moveProgressBar('64.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the user</span><span class='duration'>0.02217s</span></dd>
+  </dl>
+</div>
+<div id="div_group_48" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_48" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('65.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the user as @user</span><span class='duration'>0.01705s</span></dd>
+    <script type="text/javascript">moveProgressBar('66.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the &#39;edit&#39; template</span><span class='duration'>0.01691s</span></dd>
+  </dl>
+</div>
+<div id="div_group_49" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_49" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('67.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested user as @user</span><span class='duration'>0.01487s</span></dd>
+  </dl>
+</div>
+<div id="div_group_50" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_50" class="passed">Navibar</dt>
+  </dl>
+</div>
+<div id="div_group_51" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_51" class="passed">when not signed in</dt>
+    <script type="text/javascript">moveProgressBar('68.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should be in all the sites</span><span class='duration'>0.21860s</span></dd>
+    <script type="text/javascript">moveProgressBar('69.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should include links to Ideas and New Idea</span><span class='duration'>0.13381s</span></dd>
+  </dl>
+</div>
+<div id="div_group_52" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_52" class="passed">IdeaKeyword</dt>
+    <script type="text/javascript">moveProgressBar('70.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">there is working link between one Idea and one Keyword</span><span class='duration'>0.01369s</span></dd>
+    <script type="text/javascript">moveProgressBar('72.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">you can add several Keywords to one Idea</span><span class='duration'>0.02298s</span></dd>
+    <script type="text/javascript">moveProgressBar('73.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">you can add one Keyword to several Ideas</span><span class='duration'>0.02183s</span></dd>
+  </dl>
+</div>
+<div id="div_group_53" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_53" class="passed">UsersController</dt>
+  </dl>
+</div>
+<div id="div_group_54" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_54" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('74.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #create</span><span class='duration'>0.00237s</span></dd>
+    <script type="text/javascript">moveProgressBar('75.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #new</span><span class='duration'>0.00233s</span></dd>
+    <script type="text/javascript">moveProgressBar('76.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #destroy</span><span class='duration'>0.00258s</span></dd>
+    <script type="text/javascript">moveProgressBar('77.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #show</span><span class='duration'>0.00231s</span></dd>
+    <script type="text/javascript">moveProgressBar('78.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #index</span><span class='duration'>0.00189s</span></dd>
+    <script type="text/javascript">moveProgressBar('79.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #update</span><span class='duration'>0.00264s</span></dd>
+    <script type="text/javascript">moveProgressBar('80.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #edit</span><span class='duration'>0.00365s</span></dd>
+  </dl>
+</div>
+<div id="div_group_55" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_55" class="passed">users/new</dt>
+    <script type="text/javascript">moveProgressBar('81.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders new user form</span><span class='duration'>0.04068s</span></dd>
+  </dl>
+</div>
+<div id="div_group_56" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_56" class="passed">When not signed in</dt>
+    <script type="text/javascript">moveProgressBar('82.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">Comment db has a 1 new comment after commenting</span><span class='duration'>0.04417s</span></dd>
+    <script type="text/javascript">moveProgressBar('83.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved when user_id is not given</span><span class='duration'>0.02326s</span></dd>
+    <script type="text/javascript">moveProgressBar('84.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved when comment text is not given</span><span class='duration'>0.02361s</span></dd>
+  </dl>
+</div>
+<div id="div_group_57" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_57" class="passed">Idea</dt>
+    <script type="text/javascript">moveProgressBar('86.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved if description is not given</span><span class='duration'>0.00829s</span></dd>
+    <script type="text/javascript">moveProgressBar('87.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should provide a method to list all its keywords</span><span class='duration'>0.01587s</span></dd>
+    <script type="text/javascript">moveProgressBar('88.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">is not saved if name is not given</span><span class='duration'>0.00901s</span></dd>
+    <script type="text/javascript">moveProgressBar('89.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have a description field</span><span class='duration'>0.00576s</span></dd>
+    <script type="text/javascript">moveProgressBar('90.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">has been created with name and description</span><span class='duration'>0.00563s</span></dd>
+  </dl>
+</div>
+<div id="div_group_58" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_58" class="passed">KeywordsController</dt>
+  </dl>
+</div>
+<div id="div_group_59" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_59" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('91.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #create</span><span class='duration'>0.00252s</span></dd>
+    <script type="text/javascript">moveProgressBar('92.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #new</span><span class='duration'>0.00217s</span></dd>
+    <script type="text/javascript">moveProgressBar('93.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #destroy</span><span class='duration'>0.00188s</span></dd>
+    <script type="text/javascript">moveProgressBar('94.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #show</span><span class='duration'>0.00171s</span></dd>
+    <script type="text/javascript">moveProgressBar('95.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #index</span><span class='duration'>0.00179s</span></dd>
+    <script type="text/javascript">moveProgressBar('96.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #update</span><span class='duration'>0.00180s</span></dd>
+    <script type="text/javascript">moveProgressBar('97.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">routes to #edit</span><span class='duration'>0.00172s</span></dd>
+  </dl>
+</div>
+<div id="div_group_60" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_60" class="passed">Users</dt>
+  </dl>
+</div>
+<div id="div_group_61" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_61" class="passed">GET /users</dt>
+    <script type="text/javascript">moveProgressBar('98.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span><span class='duration'>0.09133s</span></dd>
+  </dl>
+</div>
+<div id="div_group_62" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_62" class="passed">users/show</dt>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders attributes in &lt;p&gt;</span><span class='duration'>0.01743s</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>2.96258 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "93 examples, 1 failure";</script>
+</div>
+</div>
+</body>
+</html>
+
+Randomized with seed 3288
+

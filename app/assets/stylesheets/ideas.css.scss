@@ -37,13 +37,30 @@
 	border-top:1px solid #dddddd;
 }
 
-.table.details th,
-.table.details td{
+.table th.vote,
+.table td.vote {
+  padding: 8px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: top;
+  border-top: 0px solid #dddddd; }
+
+.table th.details,
+.table td.details{
 	padding:8px;
 	line-height:20px;
 	text-align:left;
 	vertical-align:top;
 	border-top:0px solid #dddddd;
+}
+
+.table th.ivote,
+.table td.ivote{
+	padding:8px;
+	line-height:20px;
+	text-align:center;
+	vertical-align:center;
+	border-top:1px solid #dddddd;
 }
 
 input, textarea, select, .uneditable-input {
