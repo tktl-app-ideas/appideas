@@ -130,7 +130,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1.json
   def update
     @idea = Idea.find(params[:id])
-    # get user to add comment, for now just one default user
+    # get user to add comment, for now use dummy user
     user = User.first
     comment_body = params[:comment_body]
     unless comment_body.nil? or comment_body.empty?
@@ -183,23 +183,15 @@ class IdeasController < ApplicationController
   end
   
   def upvote
-    if current_user.nil?
-      redirect_to signin_path, notice:'In order to vote, you should sign in'
-    else
-      @idea = Idea.find(params[:id])
-      @idea.liked_by current_user
-      redirect_to :back
-    end
+    @idea = Idea.find(params[:id])
+    @idea.liked_by current_user
+    redirect_to :back
   end
   
   def downvote
-    if current_user.nil?
-      redirect_to signin_path, notice:'In order to vote, you should sign in'
-    else
-      @idea = Idea.find(params[:id])
-      @idea.downvote_from current_user
-      redirect_to :back
-    end
+    @idea = Idea.find(params[:id])
+    @idea.downvote_from current_user
+    redirect_to :back
   end
 
   def admin
