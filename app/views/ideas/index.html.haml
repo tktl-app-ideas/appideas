@@ -15,13 +15,13 @@
     
     - @indexideas.reverse.each do |idea|
       %tr
-        %td{style: "width:6%"}
+        %td.ivote{style: "width:10%"}
           = link_to "", like_idea_path(idea), method: :put, :class => 'glyphicon glyphicon-chevron-up btn-default'            
           %br
           = idea.upvotes.size-idea.downvotes.size
           %br
           = link_to "", dislike_idea_path(idea), method: :put, :class => 'glyphicon glyphicon-chevron-down btn-default'
-        %td{style: "width:95%"}
+        %td
           -#= link_to idea.id, idea_path(idea)
           %h4= link_to idea.name, idea
           %p
