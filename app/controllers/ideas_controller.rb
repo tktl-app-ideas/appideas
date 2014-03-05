@@ -1,58 +1,58 @@
 require 'rails_autolink'
 
 class IdeasController < ApplicationController
-		
+
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   before_action :set_keywords
-	before_action :ensure_that_signed_in, only: [:upvote, :downvote]
+  before_action :ensure_that_signed_in, only: [:upvote, :downvote]
   #before_action :set_comments
-    
+
   # GET /ideas
   # GET /ideas.json
   def index
     kw = Keyword.find(params[:kw].to_i) unless params[:kw].nil?
     @ideas = Idea.all
-    @keywordname = "" if kw.nil?
-    @keywordname = kw.name  + " - " unless kw.nil?
-    @indexideas = Idea.all if kw.nil?
-    @indexideas = Idea.all.select{ |i| i.keywords.include?(kw)} if not kw.nil?
 
-# This section adds filtering to keyword bar, customer doesn't want it anymore
+    if kw.nil?
+      @keywordname = ""
+      @indexideas = Idea.all.order('name ASC')
+    else
+      @keywordname = kw.name  + " - "
+      @indexideas = Idea.all.order('name ASC').select{ |i| i.keywords.include?(kw)}
+    end
+    # This section adds filtering to keyword bar, customer doesn't want it anymore
 =begin
     @keywords = []
     @indexideas.each do |i|
-        i.keywords.each do |k| 
+        i.keywords.each do |k|
           @keywords << k
         end
-        
       order = params[:order] || 'id'
-
       case order
         when 'id' then @indexideas.sort_by!{ |b| b.id }
       end
     end
 =end
-# replaced by @keywords = Keyword.all
+    # replaced by @keywords = Keyword.all
     @keywords = Keyword.all
 
-    @keywords = @keywords.inject([]){ |result, h| result << h unless result.include?(h); result }
+#    @keywords = @keywords.each_with_object([]){ |kv, result| result << kv unless result.include?(kv); result }
+    @keywords = @keywords.uniq
     @words = @keywords unless kw.nil?
-    
+
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @words.sort_by!{ |b| b.name }
+    when 'name' then @words.order('name DESC')# @words.sort_by!{ |b| b.name }
     end
-    
+
     # this new idea needed when there is no related keyword to form new idea partial
     @idea = Idea.new
-    
-    
   end
 
 
   # GET /ideas/1
-	# GET /ideas/1.json
+  # GET /ideas/1.json
   def show
     @idea = Idea.find(params[:id])
     # get comments from db
@@ -60,7 +60,7 @@ class IdeasController < ApplicationController
     @keywords = @idea.keywords
     #@words = @keywords
     @all = Keyword.all
-    keyword_id = params[:keyword_id]
+   # keyword_id = params[:keyword_id]
 =begin
     remove_id = params[:remove_id]
     unless remove_id.nil? or remove_id.empty?
