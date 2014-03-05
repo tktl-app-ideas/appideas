@@ -6,13 +6,13 @@ class KeywordsController < ApplicationController
   # GET /keywords.json
   def index
     @keywords = Keyword.all
-    
+
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @keywords.sort_by!{ |b| b.name }
+    when 'name' then @keywords.sort_by!{ |b| b.name }
     end
-    
+
   end
 
   # GET /keywords/1
@@ -68,7 +68,7 @@ class KeywordsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def admin
     @keywords = Keyword.all
   end
@@ -84,7 +84,7 @@ class KeywordsController < ApplicationController
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @words.sort_by!{ |b| b.name }
+    when 'name' then @words.sort_by!{ |b| b.name }
     end
   end
 

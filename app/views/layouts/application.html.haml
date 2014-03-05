@@ -41,11 +41,11 @@
           .well.sidebar-nav
             %ul.nav.nav-list
               %li.nav-header Keywords
-              - @words.each do |keyword|                                     
+              - @words.each do |keyword|
                 %span
                   %li
                     = link_to keyword.name, ideas_path(:kw => keyword)
-                  /  
+                  /
                     - if request.path =~ /\/ideas\/\d+$/
                       = link_to t('.update', :default => ""), idea_path(id: request.path.match(/\d+/i), remove_id: keyword.id), :class => 'glyphicon glyphicon-remove btn-default'
             /
@@ -73,13 +73,13 @@
                 - @comments.each do |comment|
                   %tr
                     %td
-                      %small{:id => "comment_cell"} 
+                      %small{:id => "comment_cell"}
                         = comment.created_at
                       %br
                       = simple_format (auto_link (comment.body))
             = form_tag(request.path, :method => :patch) do
               = text_area_tag :comment_body
               = submit_tag "Comment"
-    
+
       %footer
         %p &copy; tktl-appideas

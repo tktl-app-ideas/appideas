@@ -4,9 +4,9 @@ describe User do
   before(:each) do
     @user = User.create username:"nimi", password:"salasana", password_confirmation:"salasana"
   end
-  
+
   it "is saved with correct name and password" do
-    
+
     expect(@user.valid?).to be(true)
     expect(User.count).to eq(1)
   end

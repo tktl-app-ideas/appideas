@@ -76,21 +76,21 @@ class IdeasController < ApplicationController
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @all.sort_by!{ |b| b.name }
+    when 'name' then @all.sort_by!{ |b| b.name }
     end
 
   end
-    
+
 
   # GET /ideas/new
   def new
     @idea = Idea.new
     @keywords = Keyword.all
-    
+
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @keywords.sort_by!{ |b| b.name }
+    when 'name' then @keywords.sort_by!{ |b| b.name }
     end
   end
 
@@ -98,22 +98,22 @@ class IdeasController < ApplicationController
   def edit
     @keywords = Keyword.all
     @all = Keyword.all
-    
+
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @keywords.sort_by!{ |b| b.name }
+    when 'name' then @keywords.sort_by!{ |b| b.name }
     end
   end
 
-# POST /ideas # POST /ideas.json
+  # POST /ideas # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
     keyword_ids = params[:idea][:keyword_ids]
     keywords =
-        Keyword.select do |k|
-        keyword_ids.include? k.id.to_s
-        end
+      Keyword.select do |k|
+      keyword_ids.include? k.id.to_s
+      end
     if @idea.save
       @idea.keywords << keywords
       redirect_to @idea
@@ -138,13 +138,13 @@ class IdeasController < ApplicationController
       comment.save
     end
     old_keywords = @idea.keywords
-    
-    
+
+
     if(params.has_key?(:idea))
       keyword_ids = params[:idea][:keyword_ids]
       keywords =
         Keyword.select do |k|
-          keyword_ids.include? k.id.to_s
+        keyword_ids.include? k.id.to_s
         end
       keywords.each do |kw|
         unless old_keywords.include? kw
@@ -160,9 +160,9 @@ class IdeasController < ApplicationController
           format.json { head :no_content }
         else
           @keywords = Keyword.all
-    			@all = Keyword.all
-  # Any other options to set comments? It shows now idea's comments after trying to update unvalid idea.
-    			set_comments
+          @all = Keyword.all
+          # Any other options to set comments? It shows now idea's comments after trying to update unvalid idea.
+          set_comments
           format.html { render action: 'edit' }
           format.json { render json: @idea.errors, status: :unprocessable_entity }
         end
@@ -181,13 +181,13 @@ class IdeasController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def upvote
     @idea = Idea.find(params[:id])
     @idea.liked_by current_user
     redirect_to :back
   end
-  
+
   def downvote
     @idea = Idea.find(params[:id])
     @idea.downvote_from current_user
@@ -206,11 +206,11 @@ class IdeasController < ApplicationController
 
   def set_keywords
     @words = Keyword.all
-    
+
     order = params[:order] || 'name'
 
     case order
-      when 'name' then @words.sort_by!{ |b| b.name }
+    when 'name' then @words.sort_by!{ |b| b.name }
     end
   end
 

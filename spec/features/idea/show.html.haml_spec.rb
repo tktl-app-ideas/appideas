@@ -9,7 +9,7 @@ describe "Idea page" do
     before :each do
       idea.save
       idea.keywords << keyword
-      keyword2.save 
+      keyword2.save
     end
 
     it "should show all related keywords in the sidebar" do

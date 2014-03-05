@@ -14,22 +14,22 @@
 
 .nav-tabs>li>a,
 .nav-pills>li>a{
-	*zoom:1;
-	font-size:large;
-	*font-family:"Lithos Pro";
-	font-weight:bold;	
-	height:40px;
+  *zoom:1;
+  font-size:large;
+  *font-family:"Lithos Pro";
+  font-weight:bold;
+  height:40px;
 }
 
 .nav-tabs>li.small>a,
 .nav-pills>li.small>a{
-	*zoom:1;
-	font-size:small;
-	*font-family:"Lithos Pro";
-	font-weight:bold;	
-	height:40px;
+  *zoom:1;
+  font-size:small;
+  *font-family:"Lithos Pro";
+  font-weight:bold;
+  height:40px;
 }
-   
+
 .nav-tabs:before,
 .nav-pills:before,
 .nav-tabs:after,
