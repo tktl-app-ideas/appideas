@@ -96,13 +96,13 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
-    @keywords = Keyword.all
     @all = Keyword.all
 
     order = params[:order] || 'name'
 
-    case order
-    when 'name' then @keywords.sort_by!{ |b| b.name }
+    @keywords = case order
+    when 'name' then Keyword.all.order("? ASC", order)
+    else Keywork.all
     end
   end
 
@@ -110,10 +110,10 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     keyword_ids = params[:idea][:keyword_ids]
-    keywords =
-      Keyword.select do |k|
-      keyword_ids.include? k.id.to_s
-      end
+    keywords = Keyword.select do |k|
+        keyword_ids.include? k.id.to_s
+    end
+
     if @idea.save
       @idea.keywords << keywords
       redirect_to @idea
@@ -151,9 +151,11 @@ class IdeasController < ApplicationController
           @idea.keywords << kw
         end
       end
+
       old_keywords.each do |old|
         IdeaKeyword.find_by_keyword_id_and_idea_id(old.id, @idea.id).destroy unless keywords.include? old
       end
+
       respond_to do |format|
         if @idea.update(idea_params)
           format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
@@ -205,12 +207,11 @@ class IdeasController < ApplicationController
   end
 
   def set_keywords
-    @words = Keyword.all
-
     order = params[:order] || 'name'
 
-    case order
-    when 'name' then @words.sort_by!{ |b| b.name }
+    @words = case order
+    when 'name' then Keyword.order("? ASC", order)
+    else Keyword.all
     end
   end
 
@@ -223,6 +224,5 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea).permit(:name, :desc)
   end
-
 
 end
